@@ -1,0 +1,53 @@
+const express = require('express');
+const app = express();
+
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://127.0.0.1:27017/mySaloon');
+// mongodb+srv://pushpamgaurav3:e5tvoDyrEvo1HDqp@mysaloon.rlqufop.mongodb.net/
+//mongoose.connect('mongodb+srv://pushpamgaurav3:e5tvoDyrEvo1HDqp@mysaloon.rlqufop.mongodb.net/');
+
+
+//user routes 
+
+const user_route = require('./routes/userRoutes');
+app.use('/api', user_route)
+
+
+// category routes
+const category_routes = require('./routes/categoryRoute');
+app.use('/api', category_routes);
+
+//subcategory routes 
+
+const subcategory_route = require('./routes/subCategoryRoutes');
+app.use('/api', subcategory_route);
+
+// product routes::::::
+const product_routes = require('./routes/productRoute');
+app.use('/api', product_routes);
+
+// buy Product routes:::::::::::
+const buy_product_route = require('./routes/buyProductRoute');
+app.use('/api', buy_product_route);
+
+// Rating routes::::::::::
+const rating_routes = require('./routes/ratingRoute');
+app.use('/api', rating_routes)
+
+app.post('/myapi', (req, res) => {
+  res.send("hello");
+});
+
+
+app.get('/getapi', (req, res) => {
+
+
+  res.send('server is runnimng at render');
+
+});
+
+
+
+app.listen(3008, function () {
+  console.log("Server is running");
+})
